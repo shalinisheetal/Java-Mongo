@@ -30,4 +30,4 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-src/resources/project.properties
+src/main/resources/project.properties
