@@ -31,3 +31,5 @@ buildNumber.properties
 .classpath
 
 src/main/resources/project.properties
+
+.idea
