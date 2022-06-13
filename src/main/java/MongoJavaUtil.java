@@ -1,11 +1,14 @@
 import static com.mongodb.client.model.Filters.eq;
 
+import cucumber.api.java.eo.Do;
 import org.bson.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class MongoJavaUtil {
@@ -27,12 +30,25 @@ public class MongoJavaUtil {
                 }
         }
 
-        public MongoClient connect(){
+        public MongoClient connectToDB(){
                 String uri = "mongodb+srv://"+this.username+":"+this.password+"@cluster0.qlb4z.mongodb.net/?retryWrites=true&w=majority";
 
                 MongoClient mongoClient = MongoClients.create(uri);
-                System.out.println("Connected to database successfully.");
+                //System.out.println("Connected to database successfully.");
                 return mongoClient;
+        }
+
+        public void insertIntoDB(MongoCollection<Document> collection, LinkedHashMap<String, String> doc){
+                Document document = new Document();
+                for (Map.Entry<String, String> mapElement :
+                        doc.entrySet()) {
+
+                        String key = mapElement.getKey();
+                        String value = mapElement.getValue();
+
+                        document.append(key, value);
+                }
+                collection.insertOne(document);
         }
         public static void main( String[] args ) {
                 // uri string with your MongoDB deployment's connection string
